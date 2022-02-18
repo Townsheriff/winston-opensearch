@@ -2,7 +2,7 @@ const fs = require('fs');
 const should = require('should');
 const winston = require('winston');
 const http = require('http');
-const { Client } = require('@elastic/elasticsearch');
+const { Client } = require('@opensearch-project/opensearch');
 
 require('../index');
 const defaultTransformer = require('../transformer');

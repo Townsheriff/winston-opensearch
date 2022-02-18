@@ -1,8 +1,9 @@
 {
-  "name": "winston-elasticsearch",
+  "name": "winston-opensearch",
   "version": "0.16.1",
-  "description": "An Elasticsearch transport for winston",
+  "description": "An Opensearch transport for winston",
   "main": "index",
+  "types": "index.d.ts",
   "authors": [
     {
       "name": "Jacques-Olivier D. Bernier",
@@ -20,23 +21,17 @@
       "url": "https://github.com/andypotanin"
     }
   ],
-  "repository": {
-    "type": "git",
-    "url": "http://github.com/vanthome/winston-elasticsearch.git"
-  },
   "license": "MIT",
   "keywords": [
     "logging",
     "winston",
-    "elasticsearch",
+    "opensearch",
     "transport",
     "logstash"
   ],
-  "optionalDependencies": {
-    "elastic-apm-node": "^3.20.0"
-  },
+  "optionalDependencies": {},
   "dependencies": {
-    "@elastic/elasticsearch": "^7.16.0",
+    "@opensearch-project/opensearch": "^1.0.2",
     "dayjs": "^1.10.7",
     "debug": "^4.3.3",
     "lodash.defaults": "^4.2.0",

@@ -5,14 +5,14 @@ const Transport = require('winston-transport');
 const dayjs = require('dayjs');
 const defaults = require('lodash.defaults');
 const omit = require('lodash.omit');
-const { Client } = require('@elastic/elasticsearch');
+const { Client } = require('@opensearch-project/opensearch');
 const defaultTransformer = require('./transformer');
 const BulkWriter = require('./bulk_writer');
 
-class ElasticsearchTransport extends Transport {
+class OpensearchTransport extends Transport {
   constructor(opts) {
     super(opts);
-    this.name = 'elasticsearch';
+    this.name = 'opensearch';
     this.handleExceptions = opts.handleExceptions || false;
     this.handleRejections = opts.handleRejections || false;
     this.exitOnError = false;
@@ -141,13 +141,8 @@ class ElasticsearchTransport extends Transport {
       delete entry.indexInterfix;
     }
 
-    if (this.opts.apm) {
-      const apm = this.opts.apm.currentTraceIds;
-      if (apm['transaction.id']) entry.transaction = { id: apm['transaction.id'], ...entry.transaction };
-      if (apm['trace.id']) entry.trace = { id: apm['trace.id'], ...entry.trace };
-      if (apm['span.id']) entry.span = { id: apm['span.id'], ...entry.span };
-    }
-
+    console.log("indexName", index);
+    console.log("appending", entry);
     this.bulkWriter.append(index, entry);
 
     callback();
@@ -174,9 +169,9 @@ class ElasticsearchTransport extends Transport {
   }
 }
 
-winston.transports.Elasticsearch = ElasticsearchTransport;
+winston.transports.OpensearchTransport = OpensearchTransport;
 
 module.exports = {
-  ElasticsearchTransport,
-  ElasticsearchTransformer: defaultTransformer
+  OpensearchTransport: OpensearchTransport,
+  OpensearchTransformer: defaultTransformer
 };

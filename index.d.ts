@@ -1,4 +1,4 @@
-import { Client, ClientOptions, ApiResponse } from '@elastic/elasticsearch';
+import { Client, ClientOptions, ApiResponse } from '@opensearch-project/opensearch';
 import TransportStream = require('winston-transport');
 
 export interface LogData {
@@ -12,9 +12,8 @@ export interface Transformer {
   (logData: LogData): any;
 }
 
-export interface ElasticsearchTransportOptions extends TransportStream.TransportStreamOptions {
+export interface OpensearchTransportOptions extends TransportStream.TransportStreamOptions {
   dataStream?: boolean;
-  apm?: any; // typeof Agent;
   timestamp?: () => string;
   level?: string;
   index?: string;
@@ -39,13 +38,13 @@ export interface ElasticsearchTransportOptions extends TransportStream.Transport
   retryLimit?: number;
 }
 
-export class ElasticsearchTransport extends TransportStream {
-  constructor(opts?: ElasticsearchTransportOptions);
+export class OpensearchTransport extends TransportStream {
+  constructor(opts?: OpensearchTransportOptions);
   flush(): Promise<any>;
 
   query<T>(options: any, callback?: () => void): Promise<ApiResponse<T>>;
   query<T>(q: string): Promise<ApiResponse<T>>;
-  getIndexName(opts: ElasticsearchTransportOptions): string;
+  getIndexName(opts: OpensearchTransportOptions): string;
 }
 
 interface TransformedData {
@@ -58,4 +57,4 @@ interface TransformedData {
   span?: { id: string }
 }
 
-export function ElasticsearchTransformer(logData: LogData): TransformedData;
+export function OpensearchTransformer(logData: LogData): TransformedData;
