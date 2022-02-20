@@ -141,8 +141,6 @@ class OpensearchTransport extends Transport {
       delete entry.indexInterfix;
     }
 
-    console.log("indexName", index);
-    console.log("appending", entry);
     this.bulkWriter.append(index, entry);
 
     callback();

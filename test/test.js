@@ -190,7 +190,6 @@ describe('a non buffering logger', () => {
       logger.end();
       done();
     } catch (err) {
-      // console.log('1111111111111');
       should.not.exist(err);
     }
   });
